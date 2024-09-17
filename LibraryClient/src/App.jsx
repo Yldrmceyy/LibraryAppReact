@@ -10,10 +10,17 @@ function App() {
 
 
   return (
-    <>
-     
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/publisher" element={<PublisherPage />} />
+        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/book" element={<BookPage />} />
+        <Route path="/author" element={<AuthorPage />} />
+        <Route path="/borrow" element={<BorrowBookPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App
