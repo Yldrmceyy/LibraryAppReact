@@ -36,29 +36,7 @@ function AuthorPage() {
       });
   }, []);
 
-  const handleAddAuthor = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors`, newAuthor)
-      .then((res) => {
-        setAuthors([...authors, res.data]);
-        setNewAuthor({ id: 0, name: '', establishmentYear: '', address: '' });
-        setShowForm(false);
-        setModalTitle('Success');
-        setModalContent('Author added successfully.');
-        setModalConfirmColor('success');
-        setModalConfirmText('Close');
-        setModalOpen(true);
-      })
-      .catch(() => {
-        setModalTitle('Error');
-        setModalContent('Failed to add author.');
-        setModalConfirmColor('error');
-        setModalConfirmText('Close');
-        setModalOpen(true);
-      });
-  };
-
+   
   const handleUpdateAuthor = (e) => {
     e.preventDefault();
     axios
