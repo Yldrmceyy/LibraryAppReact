@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Box } from '@mui/material';
-import PublisherForm from '../components/Publisher/PublisherForm';
-import PublisherEdit from '../components/Publisher/PublisherEdit';
-import PublisherTable from '../components/Publisher/PublisherTable';
+import AuthorForm from '../components/Author/AuthorForm';
+import AuthorEdit from '../components/Author/AuthorEdit';
+import AuthorTable from '../components/Author/AuthorTable';
 import GeneralModal from '../components/GeneralModal'; 
 
-function PublisherPage() {
-  const [publishers, setPublishers] = useState([]);
-  const [newPublisher, setNewPublisher] = useState({
+function AuthorPage() {
+  const [authors, setAuthors] = useState([]);
+  const [newAuthor, setNewAuthor] = useState({
     id: 0,
     name: '',
     establishmentYear: '',
     address: '',
   });
-  const [editPublisher, setEditPublisher] = useState(null);
+  const [editAuthor, setEditAuthor] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
@@ -25,90 +25,90 @@ function PublisherPage() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/publishers`)
-      .then((res) => setPublishers(res.data))
+      .get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors`)
+      .then((res) => setAuthors(res.data))
       .catch(() => {
         setModalTitle('Error');
-        setModalContent('Failed to fetch publishers.');
+        setModalContent('Failed to fetch authors.');
         setModalConfirmColor('error');
         setModalConfirmText('Close');
         setModalOpen(true);
       });
   }, []);
 
-  const handleAddPublisher = (e) => {
+  const handleAddAuthor = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/publishers`, newPublisher)
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors`, newAuthor)
       .then((res) => {
-        setPublishers([...publishers, res.data]);
-        setNewPublisher({ id: 0, name: '', establishmentYear: '', address: '' });
+        setAuthors([...authors, res.data]);
+        setNewAuthor({ id: 0, name: '', establishmentYear: '', address: '' });
         setShowForm(false);
         setModalTitle('Success');
-        setModalContent('Publisher added successfully.');
+        setModalContent('Author added successfully.');
         setModalConfirmColor('success');
         setModalConfirmText('Close');
         setModalOpen(true);
       })
       .catch(() => {
         setModalTitle('Error');
-        setModalContent('Failed to add publisher.');
+        setModalContent('Failed to add author.');
         setModalConfirmColor('error');
         setModalConfirmText('Close');
         setModalOpen(true);
       });
   };
 
-  const handleUpdatePublisher = (e) => {
+  const handleUpdateAuthor = (e) => {
     e.preventDefault();
     axios
       .put(
-        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/publishers/${editPublisher.id}`,
-        editPublisher
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors/${editAuthor.id}`,
+        editAuthor
       )
       .then((res) => {
-        setPublishers(
-          publishers.map((publisher) =>
-            publisher.id === editPublisher.id ? res.data : publisher
+        setAuthors(
+          authors.map((author) =>
+            author.id === editAuthor.id ? res.data : author
           )
         );
-        setEditPublisher(null);
+        setEditAuthor(null);
         setShowForm(false);
         setModalTitle('Success');
-        setModalContent('Publisher updated successfully.');
+        setModalContent('Author updated successfully.');
         setModalConfirmColor('success');
         setModalConfirmText('Close');
         setModalOpen(true);
       })
       .catch(() => {
         setModalTitle('Error');
-        setModalContent('Failed to update publisher.');
+        setModalContent('Failed to update author.');
         setModalConfirmColor('error');
         setModalConfirmText('Close');
         setModalOpen(true);
       });
   };
 
-  const handleDeletePublisher = (id) => {
+  const handleDeleteAuthor = (id) => {
     setModalTitle('Confirm Deletion');
-    setModalContent('Are you sure you want to delete this publisher?');
+    setModalContent('Are you sure you want to delete this author?');
     setModalConfirmText('Delete');
     setModalConfirmColor('error');
     setModalOpen(true);
 
     setAction(() => () => {
       axios
-        .delete(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/publishers/${id}`)
+        .delete(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors/${id}`)
         .then(() => {
-          setPublishers(publishers.filter((publisher) => publisher.id !== id));
+          setAuthors(authors.filter((author) => author.id !== id));
           setModalTitle('Success');
-          setModalContent('Publisher deleted successfully.');
+          setModalContent('Author deleted successfully.');
           setModalConfirmColor('success');
           setModalConfirmText('Close');
         })
         .catch(() => {
           setModalTitle('Error');
-          setModalContent('Failed to delete publisher.');
+          setModalContent('Failed to delete author.');
           setModalConfirmColor('error');
           setModalConfirmText('Close');
         });
@@ -122,32 +122,32 @@ function PublisherPage() {
 
   return (
     <Container component="main">
-      <Box className="publisher-page-container">
+      <Box className="author-page-container">
         {showForm && (
-          editPublisher ? (
-            <PublisherEdit
-              publisher={editPublisher}
-              onChange={(field, value) => setEditPublisher({ ...editPublisher, [field]: value })}
-              onSubmit={handleUpdatePublisher}
+          editAuthor ? (
+            <AuthorEdit
+              author={editAuthor}
+              onChange={(field, value) => setEditAuthor({ ...editAuthor, [field]: value })}
+              onSubmit={handleUpdateAuthor}
             />
           ) : (
-            <PublisherForm
-              publisher={newPublisher}
-              onChange={(field, value) => setNewPublisher({ ...newPublisher, [field]: value })}
-              onSubmit={handleAddPublisher}
+            <AuthorForm
+              author={newAuthor}
+              onChange={(field, value) => setNewAuthor({ ...newAuthor, [field]: value })}
+              onSubmit={handleAddAuthor}
             />
           )
         )}
-        <PublisherTable
-          publishers={publishers}
-          onEdit={(publisher) => {
-            setEditPublisher(publisher);
+        <AuthorTable
+          authors={authors}
+          onEdit={(author) => {
+            setEditAuthor(author);
             setShowForm(true);
           }}
-          onDelete={handleDeletePublisher}
+          onDelete={handleDeleteAuthor}
           onAdd={() => {
-            setNewPublisher({ id: 0, name: '', establishmentYear: '', address: '' });
-            setEditPublisher(null);
+            setNewAuthor({ id: 0, name: '', establishmentYear: '', address: '' });
+            setEditAuthor(null);
             setShowForm(true);
           }}
         />
@@ -165,4 +165,4 @@ function PublisherPage() {
   );
 }
 
-export default PublisherPage;
+export default AuthorPage;
