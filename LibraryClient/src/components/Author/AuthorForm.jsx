@@ -1,0 +1,40 @@
+import React from "react";
+import { TextField, Button, Typography, Box } from "@mui/material";
+
+function AuthorForm({ author, onChange, onSubmit, error }) {
+  return (
+    <Box className="form-container">
+      <Typography component="h1" variant="h5">
+        Add Author
+      </Typography>
+      <form onSubmit={onSubmit} className="author-form">
+        <TextField
+          label="Author Name"
+          fullWidth
+          value={author.name}
+          onChange={(e) => onChange("name", e.target.value)}
+        />
+        <TextField
+          label="Birth Date"
+          fullWidth
+          type="date"
+          InputLabelProps={{ shrink: true }}
+          value={author.birthDate}
+          onChange={(e) => onChange("birthDate", e.target.value)}
+        />
+        <TextField
+          label="Country"
+          fullWidth
+          value={author.country}
+          onChange={(e) => onChange("country", e.target.value)}
+        />
+        <Button type="submit" fullWidth variant="contained">
+          Add Author
+        </Button>
+      </form>
+     
+    </Box>
+  );
+}
+
+export default AuthorForm;
