@@ -11,8 +11,8 @@ function AuthorPage() {
   const [newAuthor, setNewAuthor] = useState({
     id: 0,
     name: '',
-    establishmentYear: '',
-    address: '',
+    birthDate: '',
+    country: '',
   });
   const [editAuthor, setEditAuthor] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -36,14 +36,35 @@ function AuthorPage() {
       });
   }, []);
 
-   
+  // Add new author
+  const handleAddAuthor = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors`, newAuthor)
+      .then((res) => {
+        setAuthors([...authors, res.data]);
+        setNewAuthor({ id: 0, name: '', birthDate: '', country: '' });
+        setShowForm(false);
+        setModalTitle('Success');
+        setModalContent('Author added successfully.');
+        setModalConfirmColor('success');
+        setModalConfirmText('Close');
+        setModalOpen(true);
+      })
+      .catch(() => {
+        setModalTitle('Error');
+        setModalContent('Failed to add author.');
+        setModalConfirmColor('error');
+        setModalConfirmText('Close');
+        setModalOpen(true);
+      });
+  };
+
+  // Update existing author
   const handleUpdateAuthor = (e) => {
     e.preventDefault();
     axios
-      .put(
-        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors/${editAuthor.id}`,
-        editAuthor
-      )
+      .put(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/authors/${editAuthor.id}`, editAuthor)
       .then((res) => {
         setAuthors(
           authors.map((author) =>
@@ -67,6 +88,7 @@ function AuthorPage() {
       });
   };
 
+  // Delete author
   const handleDeleteAuthor = (id) => {
     setModalTitle('Confirm Deletion');
     setModalContent('Are you sure you want to delete this author?');
@@ -93,6 +115,7 @@ function AuthorPage() {
     });
   };
 
+  // Confirm modal action
   const handleModalConfirm = () => {
     if (action) action();
     setModalOpen(false);
@@ -124,7 +147,7 @@ function AuthorPage() {
           }}
           onDelete={handleDeleteAuthor}
           onAdd={() => {
-            setNewAuthor({ id: 0, name: '', establishmentYear: '', address: '' });
+            setNewAuthor({ id: 0, name: '', birthDate: '', country: '' });
             setEditAuthor(null);
             setShowForm(true);
           }}
