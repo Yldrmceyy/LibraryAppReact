@@ -4,7 +4,7 @@ import { Container, Box } from '@mui/material';
 import CategoryForm from '../components/Category/CategoryForm';
 import CategoryEdit from '../components/Category/CategoryEdit';
 import CategoryTable from '../components/Category/CategoryTable';
-import GeneralModal from '../components/GeneralModal'; 
+import GeneralModal from '../components/GeneralModal';
 
 function CategoryPage() {
   const [categories, setCategories] = useState([]);
@@ -23,18 +23,25 @@ function CategoryPage() {
   const [action, setAction] = useState(null);
 
   useEffect(() => {
+    // Fetch categories on component mount
     axios
       .get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/categories`)
       .then((res) => setCategories(res.data))
       .catch(() => {
-        setModalTitle('Error');
-        setModalContent('Failed to fetch categories.');
-        setModalConfirmColor('error');
-        setModalConfirmText('Close');
-        setModalOpen(true);
+        openModal('Error', 'Failed to fetch categories.', 'error', 'Close');
       });
   }, []);
 
+  // Open modal helper function
+  const openModal = (title, content, confirmColor = 'success', confirmText = 'Close') => {
+    setModalTitle(title);
+    setModalContent(content);
+    setModalConfirmColor(confirmColor);
+    setModalConfirmText(confirmText);
+    setModalOpen(true);
+  };
+
+  // Add new category
   const handleAddCategory = (e) => {
     e.preventDefault();
     axios
@@ -43,81 +50,53 @@ function CategoryPage() {
         setCategories([...categories, res.data]);
         setNewCategory({ id: 0, name: '', description: '' });
         setShowForm(false);
-        setModalTitle('Success');
-        setModalContent('Category added successfully.');
-        setModalConfirmColor('success');
-        setModalConfirmText('Close');
-        setModalOpen(true);
+        openModal('Success', 'Category added successfully.');
       })
       .catch(() => {
-        setModalTitle('Error');
-        setModalContent('Failed to add category.');
-        setModalConfirmColor('error');
-        setModalConfirmText('Close');
-        setModalOpen(true);
+        openModal('Error', 'Failed to add category.', 'error', 'Close');
       });
   };
 
+  // Update existing category
   const handleUpdateCategory = (e) => {
     e.preventDefault();
     axios
-      .put(
-        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/categories/${editCategory.id}`,
-        editCategory
-      )
+      .put(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/categories/${editCategory.id}`, editCategory)
       .then((res) => {
-        setCategories(
-          categories.map((category) =>
-            category.id === editCategory.id ? res.data : category
-          )
-        );
+        setCategories(categories.map((category) => 
+          category.id === editCategory.id ? res.data : category
+        ));
         setEditCategory(null);
         setShowForm(false);
-        setModalTitle('Success');
-        setModalContent('Category updated successfully.');
-        setModalConfirmColor('success');
-        setModalConfirmText('Close');
-        setModalOpen(true);
+        openModal('Success', 'Category updated successfully.');
       })
       .catch(() => {
-        setModalTitle('Error');
-        setModalContent('Failed to update category.');
-        setModalConfirmColor('error');
-        setModalConfirmText('Close');
-        setModalOpen(true);
+        openModal('Error', 'Failed to update category.', 'error', 'Close');
       });
   };
-  
-  
+
+  // Delete category
   const handleDeleteCategory = (id) => {
-    setModalTitle('Confirm Deletion');
-    setModalContent('Are you sure you want to delete this category?');
-    setModalConfirmText('Delete');
-    setModalConfirmColor('error');
-    setModalOpen(true);
+    openModal('Confirm Deletion', 'Are you sure you want to delete this category?', 'error', 'Delete');
 
     setAction(() => () => {
       axios
         .delete(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/categories/${id}`)
         .then(() => {
           setCategories(categories.filter((category) => category.id !== id));
-          setModalTitle('Success');
-          setModalContent('Category deleted successfully.');
-          setModalConfirmColor('success');
-          setModalConfirmText('Close');
+          openModal('Success', 'Category deleted successfully.');
         })
         .catch(() => {
-          setModalTitle('Error');
-          setModalContent('Failed to delete category.');
-          setModalConfirmColor('error');
-          setModalConfirmText('Close');
+          openModal('Error', 'Failed to delete category.', 'error', 'Close');
         });
     });
   };
 
+  // Confirm modal action
   const handleModalConfirm = () => {
     if (action) action();
-    setModalOpen(false);
+    setAction(null); // Reset action after confirmation
+    setModalOpen(false); // Close modal
   };
 
   return (
