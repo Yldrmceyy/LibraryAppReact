@@ -181,7 +181,6 @@ function BorrowingPage() {
 
   return (
     <div className="borrowing-page">
-      <h1>Book Borrowing</h1>
       {editBorrowing ? (
         <BookBorrowEdit
           borrowRequest={newBorrowing}

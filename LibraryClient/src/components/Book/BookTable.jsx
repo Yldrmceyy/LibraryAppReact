@@ -8,10 +8,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-export default function BookTable({ books, authors, publishers, categories, onEdit, onDelete, onAdd }) {
+export default function BookTable({
+  books,
+  authors,
+  publishers,
+  categories,
+  onEdit,
+  onDelete,
+  onAdd,
+}) {
   return (
     <Paper className="table-container">
-      <Button variant="contained" color="primary" onClick={onAdd} style={{ marginBottom: '16px' }}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={onAdd}
+        style={{ marginBottom: "16px" }}
+      >
         Add New Book
       </Button>
       <Table>
@@ -34,16 +47,35 @@ export default function BookTable({ books, authors, publishers, categories, onEd
               <TableCell>{book.name}</TableCell>
               <TableCell>{book.publicationYear}</TableCell>
               <TableCell>{book.stock}</TableCell>
-              <TableCell>{authors.find(author => author.id === book.author.id)?.name}</TableCell>
-              <TableCell>{publishers.find(publisher => publisher.id === book.publisher.id)?.name}</TableCell>
               <TableCell>
-                {book.categories.map(cat => categories.find(c => c.id === cat.id)?.name).join(", ")}
+                {authors.find((author) => author.id === book.author.id)?.name}
               </TableCell>
               <TableCell>
-                <Button variant="outlined" onClick={() => onEdit(book)} style={{ marginRight: '10px' }}>
+                {
+                  publishers.find(
+                    (publisher) => publisher.id === book.publisher.id
+                  )?.name
+                }
+              </TableCell>
+              <TableCell>
+                {book.categories
+                  .map((cat) => categories.find((c) => c.id === cat.id)?.name)
+                  .join(", ")}
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => onEdit(book)}
+                  style={{ marginRight: "10px" }}
+                >
                   Edit
                 </Button>
-                <Button variant="outlined" onClick={() => onDelete(book.id)}>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => onDelete(book.id)}
+                >
                   Delete
                 </Button>
               </TableCell>

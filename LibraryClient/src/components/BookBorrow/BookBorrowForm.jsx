@@ -12,8 +12,8 @@ function BookBorrowForm({ borrowRequest, setBorrowRequest, onSubmit, handleBookS
 
   return (
     <Box className="form-container" sx={{ maxWidth: 500, margin: '0 auto' }}>
-      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
-        Borrow a Book
+      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}  >
+        {/* Borrow a Book */}
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
         <Box mb={2}>
