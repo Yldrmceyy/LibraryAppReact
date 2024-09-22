@@ -57,7 +57,7 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: '#123456' }}>
+      <AppBar component="nav" sx={{ backgroundColor: '#aed814' }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             color="inherit"
@@ -71,13 +71,13 @@ function Navbar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textAlign: 'center' }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textAlign: 'center' ,fontWeight: 'bold'  }}
           >
-            My App
+            LIBRARY PROJECT
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'center', flexGrow: 1 }}>
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: '#fff' }} component={Link} to={item.path}>
+              <Button key={item.name} sx={{ color: '#fff', fontWeight: 'bold'  } } component={Link} to={item.path}>
                 {item.name}
               </Button>
             ))}
