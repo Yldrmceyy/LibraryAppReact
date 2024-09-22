@@ -10,17 +10,12 @@ function BookBorrowForm({ borrowRequest, setBorrowRequest, onSubmit, handleBookS
     }));
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();  // Prevent the default form submission behavior
-    onSubmit();  // Call the passed onSubmit function (handleAddBorrowing)
-  };
-
   return (
-    <Box className="form-container" sx={{ maxWidth: 500, margin: "0 auto" }}>
+    <Box className="form-container" sx={{ maxWidth: 500, margin: '0 auto' }}>
       <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
         Borrow a Book
       </Typography>
-      <form onSubmit={handleFormSubmit} className="book-borrow-form">
+      <form onSubmit={onSubmit} className="book-borrow-form">
         <Box mb={2}>
           <TextField
             label="Borrower Name"
@@ -58,7 +53,7 @@ function BookBorrowForm({ borrowRequest, setBorrowRequest, onSubmit, handleBookS
             <InputLabel>Select Book</InputLabel>
             <Select
               value={borrowRequest.bookForBorrowingRequest.id || ""}
-              onChange={handleBookSelect}
+              onChange={(e) => handleBookSelect(e)}
               name="bookId"
             >
               {books.map((book) => (
