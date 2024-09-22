@@ -26,7 +26,7 @@ export default function AuthorTable({ authors, onEdit, onDelete, onAssign, onAdd
         <TableBody>
           {authors.map((author) => (
             <TableRow key={author.id}>
-              <TableCell>{author.id}</TableCell> {/* ID'yi burada ekliyoruz */}
+              <TableCell>{author.id}</TableCell> 
               <TableCell component="th" scope="row">
                 {author.name}
               </TableCell>
@@ -34,10 +34,12 @@ export default function AuthorTable({ authors, onEdit, onDelete, onAssign, onAdd
               <TableCell align="center">{author.country}</TableCell>
               <TableCell align="center">
               
-                <Button variant="outlined" onClick={() => onEdit(author)} style={{ marginRight: '10px' ,width:'2px' }}>
+                <Button variant="contained"
+                    color="primary" onClick={() => onEdit(author)} style={{ marginRight: '10px' ,width:'2px' }}>
                   Edit
                 </Button>
-                <Button variant="outlined" onClick={() => onDelete(author.id)} style={{ marginRight: '10px',width:'4px'  }}>
+                <Button variant="outlined"
+                    color="error" onClick={() => onDelete(author.id)} style={{ marginRight: '10px',width:'4px'  }}>
                   Delete
                 </Button>
                 
