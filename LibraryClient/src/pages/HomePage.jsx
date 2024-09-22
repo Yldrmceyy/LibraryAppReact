@@ -1,22 +1,47 @@
-import React from 'react';
-import { Container, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Box, Typography, Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
+import backgroundImage from "../assets/book.jpg";
 
 function HomePage() {
   return (
-    <Container style={{ textAlign: 'center', marginTop: '50px' }}>
-      <Typography variant="h2" gutterBottom>
-        Kütüphaneye Hoş Geldiniz
+    <Box
+      sx={{
+        textAlign: "center",
+        height: "calc(100vh - 64px)", // Örnek: 64px navbar yüksekliği
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        color: "#fff",
+        marginTop: -6, // Boşlukları sıfırla
+        padding: 0, // İç boşlukları sıfırla
+        width: "100%", // Tam genişlik
+      }}
+    >
+      <Typography variant="h2" gutterBottom sx={{ fontWeight: "bold" }}>
+        Welcome to the Library
       </Typography>
       <Typography variant="h5" gutterBottom>
-        En sevdiğiniz kitapları keşfedin ve ödünç alın!
+        Discover and borrow your favorite books!
       </Typography>
-      <Link to="/books" style={{ textDecoration: 'none' }}>
-        <Button variant="contained" color="primary" size="large">
-          Kitaplara Göz At
-        </Button>
-      </Link>
-    </Container>
+      <Grid container justifyContent="center" sx={{ marginTop: "20px" }}>
+        <Grid item>
+          <Link to="/books" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{ padding: "10px", width: "100%", maxWidth: "300px" }}
+            >
+              Browse Books
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
