@@ -8,7 +8,7 @@ function HomePage() {
     <Box
       sx={{
         textAlign: "center",
-        height: "calc(100vh - 64px)", // Örnek: 64px navbar yüksekliği
+        height: "calc(100vh - 64px)", 
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -16,9 +16,9 @@ function HomePage() {
         flexDirection: "column",
         justifyContent: "center",
         color: "#fff",
-        marginTop: -6, // Boşlukları sıfırla
-        padding: 0, // İç boşlukları sıfırla
-        width: "100%", // Tam genişlik
+        marginTop: -6, 
+        padding: 0, 
+        width: "100%", 
       }}
     >
       <Typography variant="h2" gutterBottom sx={{ fontWeight: "bold" }}>
