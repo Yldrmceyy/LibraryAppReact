@@ -4,8 +4,9 @@ import PublisherPage from "./pages/PublisherPage";
 import CategoryPage from "./pages/CategoryPage";
 import BookPage from "./pages/BookPage";
 import AuthorPage from "./pages/AuthorPage";
-import BorrowingPage from "./pages/BorrowingPage";
+import BorrowPage from "./pages/BorrowPage";
 import Navbar from "./components/Navbar";
+
 
 import './App.css'
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/books" element={<BookPage />} />
         <Route path="/authors" element={<AuthorPage />} />
-        <Route path="/borrows" element={<BorrowingPage />} />
+        <Route path="/borrows" element={<BorrowPage />} />
       </Routes>
     </>
   );

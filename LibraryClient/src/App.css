@@ -1,6 +1,6 @@
 /* Genel Stil */
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
@@ -34,7 +34,6 @@ button {
   width: 30%;
   padding: 0.5rem;
   margin-right: 1rem;
-  background-color: #ae1dda;
   color: white;
   font-size: 1rem;
   border: none;
@@ -44,10 +43,9 @@ button {
 }
 
 button:hover {
-  background-color: #115293;
+  background-color: #aed814;
 }
 .table-container {
-  margin-top: 2rem; /* Üstten margin */
+  margin-top: 2rem; 
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-
 }
