@@ -15,10 +15,17 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
   return (
     <TableContainer
       component={Paper}
-      style={{ margin: "32px", display: "flex", justifyContent: "center" }}
+      sx={{
+        margin: "32px",
+        display: "flex",
+        justifyContent: "center",
+        padding: 2,
+        backgroundColor: "#f5f5f5",
+        borderRadius: "8px",
+      }}
     >
       <div style={{ overflowX: "hidden" }}>
-        <Table style={{ tableLayout: "auto", width: "100%" }}>
+        <Table sx={{ tableLayout: "auto", width: "100%" }}>
           <TableHead>
             <TableRow>
               {[
@@ -34,7 +41,11 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                 "Publisher",
                 "Actions",
               ].map((header, index) => (
-                <TableCell key={index} align="center" style={{ fontWeight: "bold" }}>
+                <TableCell
+                  key={index}
+                  align="center"
+                  sx={{ fontWeight: "bold" }}
+                >
                   <TableSortLabel>{header}</TableSortLabel>
                 </TableCell>
               ))}
@@ -53,10 +64,10 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                   {new Date(record.returnDate).toLocaleDateString()}
                 </TableCell>
                 <TableCell align="center">
-                  {record.book ? record.book.name : 'N/A'}
+                  {record.book ? record.book.name : "N/A"}
                 </TableCell>
                 <TableCell align="center">
-                  {record.book ? record.book.stock : 'N/A'}
+                  {record.book ? record.book.stock : "N/A"}
                 </TableCell>
                 <TableCell align="center">
                   {record.book && record.book.categories.length > 0 ? (
@@ -71,15 +82,22 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                   )}
                 </TableCell>
                 <TableCell align="center">
-                  {record.book ? record.book.author.name : 'N/A'}
+                  {record.book ? record.book.author.name : "N/A"}
                 </TableCell>
                 <TableCell align="center">
-                  {record.book ? record.book.publisher.name : 'N/A'}
+                  {record.book ? record.book.publisher.name : "N/A"}
                 </TableCell>
                 <TableCell align="center">
                   <Button
                     variant="contained"
-                    color="primary"
+                    sx={{
+                      backgroundColor: "#303f9f",
+                      ":hover": {
+                        backgroundColor: "#ffeb3b",
+                        color: "#303f9f",
+                      },
+                      marginRight: 2,
+                    }}
                     onClick={() => onEdit(record)}
                   >
                     Edit
@@ -87,6 +105,13 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                   <Button
                     variant="outlined"
                     color="error"
+                    sx={{
+                      ":hover": {
+                        backgroundColor: "#ffeb3b",
+                        color: "#303f9f",
+                      },
+                      marginRight: "10px",
+                    }}
                     onClick={() => onDelete(record.id)}
                   >
                     Delete
