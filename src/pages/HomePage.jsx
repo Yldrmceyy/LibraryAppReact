@@ -8,7 +8,7 @@ function HomePage() {
     <Box
       sx={{
         textAlign: "center",
-        height: "calc(100vh - 64px)", 
+        height: "calc(100vh - 64px)",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -16,31 +16,67 @@ function HomePage() {
         flexDirection: "column",
         justifyContent: "center",
         color: "#fff",
-        marginTop: -6, 
-        padding: 0, 
-        width: "100%", 
+        marginTop: -6,
+        padding: 0,
+        width: "100%",
+        position: "relative",
+        "::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay for better readability
+          zIndex: 1,
+        },
       }}
     >
-      <Typography variant="h2" gutterBottom sx={{ fontWeight: "bold" }}>
-        Welcome to the Library
-      </Typography>
-      <Typography variant="h5" gutterBottom>
-        Discover and borrow your favorite books!
-      </Typography>
-      <Grid container justifyContent="center" sx={{ marginTop: "20px" }}>
-        <Grid item>
-          <Link to="/books" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              sx={{ padding: "10px", width: "100%", maxWidth: "300px" }}
-            >
-              Browse Books
-            </Button>
-          </Link>
+      <Box sx={{ position: "relative", zIndex: 2 }}>
+        <Typography
+          variant="h2"
+          gutterBottom
+          sx={{
+            fontWeight: "bold",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)", // Text shadow for better readability
+          }}
+        >
+          Welcome to the Library
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
+            fontSize: "1.5rem", // Slightly bigger text for subheading
+          }}
+        >
+          Discover and borrow your favorite books!
+        </Typography>
+        <Grid container justifyContent="center" sx={{ marginTop: "20px" }}>
+          <Grid item>
+            <Link to="/books" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                sx={{
+                  padding: "12px 24px",
+                  width: "100%",
+                  maxWidth: "300px",
+                  fontSize: "1.2rem", // Larger button text
+                  backgroundColor: "#0066cc", // Custom button color
+                  ":hover": {
+                    backgroundColor: "#004c99", // Darker on hover
+                  },
+                }}
+              >
+                Browse Books
+              </Button>
+            </Link>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }
