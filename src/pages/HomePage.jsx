@@ -27,7 +27,7 @@ function HomePage() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)", 
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
           zIndex: 1,
         },
       }}
@@ -38,7 +38,7 @@ function HomePage() {
           gutterBottom
           sx={{
             fontWeight: "bold",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)", 
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
           }}
         >
           Welcome to the Library
@@ -48,7 +48,7 @@ function HomePage() {
           gutterBottom
           sx={{
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
-            fontSize: "1.5rem", 
+            fontSize: "1.5rem",
           }}
         >
           Discover and borrow your favorite books!
@@ -58,17 +58,17 @@ function HomePage() {
             <Link to="/books" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
-                color="primary"
                 size="large"
                 sx={{
                   padding: "12px 24px",
                   width: "100%",
                   maxWidth: "300px",
-                  fontSize: "1.2rem", 
-                  backgroundColor: "#0066cc", 
-                  ":hover": {
-                    backgroundColor: "#004c99", 
-                  },
+                  fontSize: "1.2rem",
+                  backgroundColor: "#303f9f", // Indigo ana arka plan rengi
+                  color: "#fff", // Beyaz metin rengi
+                  fontWeight: "bold",
+                  ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+                  transition: "background-color 0.3s ease", // Hover animasyonu için geçiş efekti
                 }}
               >
                 Browse Books
