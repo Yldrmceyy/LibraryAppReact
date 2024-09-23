@@ -23,7 +23,6 @@ function CategoryPage() {
   const [action, setAction] = useState(null);
 
   useEffect(() => {
-    // Fetch categories on component mount
     axios
       .get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/categories`)
       .then((res) => setCategories(res.data))
