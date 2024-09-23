@@ -34,11 +34,7 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                 "Publisher",
                 "Actions",
               ].map((header, index) => (
-                <TableCell
-                  key={index}
-                  align="center"
-                  style={{ fontWeight: "bold" }}
-                >
+                <TableCell key={index} align="center" style={{ fontWeight: "bold" }}>
                   <TableSortLabel>{header}</TableSortLabel>
                 </TableCell>
               ))}
@@ -56,10 +52,14 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                 <TableCell align="center">
                   {new Date(record.returnDate).toLocaleDateString()}
                 </TableCell>
-                <TableCell align="center">{record.book.name}</TableCell>
-                <TableCell align="center">{record.book.stock}</TableCell>
                 <TableCell align="center">
-                  {record.book.categories.length > 0 ? (
+                  {record.book ? record.book.name : 'N/A'}
+                </TableCell>
+                <TableCell align="center">
+                  {record.book ? record.book.stock : 'N/A'}
+                </TableCell>
+                <TableCell align="center">
+                  {record.book && record.book.categories.length > 0 ? (
                     record.book.categories.map((category, index) => (
                       <span key={index}>
                         {category.name}
@@ -70,9 +70,11 @@ function BorrowTable({ borrowRecords, onEdit, onDelete }) {
                     <span>No categories</span>
                   )}
                 </TableCell>
-                <TableCell align="center">{record.book.author.name}</TableCell>
                 <TableCell align="center">
-                  {record.book.publisher.name}
+                  {record.book ? record.book.author.name : 'N/A'}
+                </TableCell>
+                <TableCell align="center">
+                  {record.book ? record.book.publisher.name : 'N/A'}
                 </TableCell>
                 <TableCell align="center">
                   <Button

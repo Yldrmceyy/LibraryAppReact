@@ -1,7 +1,22 @@
 import React from "react";
-import { TextField, Button, Typography, Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 
-function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelect, books }) {
+function BorrowEdit({
+  borrowRequest,
+  setBorrowRequest,
+  onSubmit,
+  handleBookSelect,
+  books,
+}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBorrowRequest((prevRequest) => ({
@@ -11,8 +26,8 @@ function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
   };
 
   return (
-    <Box className="form-container" sx={{ maxWidth: 500, margin: '0 auto' }}>
-      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}  >
+    <Box className="form-container" sx={{ maxWidth: 500, margin: "0 auto" }}>
+      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
         Borrow a Book
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
@@ -30,7 +45,7 @@ function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
           <TextField
             label="Borrower Email"
             fullWidth
-            value={borrowRequest.borrowerMail}
+            value={borrowRequest.borrowerMail} // Burada borrowerMail'i alıyoruz
             onChange={handleChange}
             name="borrowerMail"
             required
@@ -53,7 +68,7 @@ function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
             <InputLabel>Select Book</InputLabel>
             <Select
               value={borrowRequest.bookForBorrowingRequest.id || ""}
-              onChange={(e) => handleBookSelect(e)}
+              onChange={(e) => handleBookSelect(e)} 
               name="bookId"
             >
               {books.map((book) => (

@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import BorrowForm from '../components/Borrow/BorrowForm';
-import BorrowEdit from '../components/Borrow/BorrowEdit';
-import BorrowTable from '../components/Borrow/BorrowTable';
-import GeneralModal from '../components/GeneralModal';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import BorrowForm from "../components/Borrow/BorrowForm";
+import BorrowEdit from "../components/Borrow/BorrowEdit";
+import BorrowTable from "../components/Borrow/BorrowTable";
+import GeneralModal from "../components/GeneralModal";
 
 function BorrowPage() {
   const [borrowings, setBorrowings] = useState([]);
   const [newBorrowing, setNewBorrowing] = useState({
-    borrowerName: '',
-    borrowerMail: '',
-    borrowingDate: '',
+    borrowerName: "",
+    borrowerMail: "",
+    borrowingDate: "",
     bookForBorrowingRequest: {
-      id: '',
-      name: '',
+      id: "",
+      name: "",
       publicationYear: 0,
-      stock: 0
-    }
+      stock: 0,
+    },
   });
   const [editBorrowing, setEditBorrowing] = useState(null);
   const [books, setBooks] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalContent, setModalContent] = useState('');
-  const [modalConfirmText, setModalConfirmText] = useState('Close');
-  const [modalConfirmColor, setModalConfirmColor] = useState('success');
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState("");
+  const [modalConfirmText, setModalConfirmText] = useState("Close");
+  const [modalConfirmColor, setModalConfirmColor] = useState("success");
 
   useEffect(() => {
     fetchBooks();
@@ -34,20 +34,24 @@ function BorrowPage() {
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/books`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/books`
+      );
       setBooks(res.data);
     } catch (err) {
-      setError('Failed to fetch books.');
+      setError("Failed to fetch books.");
     }
   };
 
   const fetchBorrowings = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`);
-      console.log('Fetched borrowings:', res.data); // Log the data
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`
+      );
+      console.log("Fetched borrowings:", res.data); // Log the data
       setBorrowings(res.data);
     } catch (err) {
-      setError('Failed to fetch borrowings.');
+      setError("Failed to fetch borrowings.");
     }
   };
 
@@ -66,51 +70,36 @@ function BorrowPage() {
         id: parseInt(newBorrowing.bookForBorrowingRequest.id, 10) || 0,
         name: newBorrowing.bookForBorrowingRequest.name,
         publicationYear: newBorrowing.bookForBorrowingRequest.publicationYear,
-        stock: newBorrowing.bookForBorrowingRequest.stock
-      }
+        stock: newBorrowing.bookForBorrowingRequest.stock,
+      },
     };
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`, borrowingData);
+      const res = await axios.post(
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`,
+        borrowingData
+      );
       setBorrowings([...borrowings, res.data]);
       resetNewBorrowing();
-      showModal('Success', 'Borrowing added successfully.', 'success');
+      showModal("Success", "Borrowing added successfully.", "success");
     } catch (err) {
-      setError('Failed to add borrowing.');
+      setError("Failed to add borrowing.");
     }
   };
 
   const handleDeleteBorrowing = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${id}`);
-      setBorrowings(borrowings.filter(borrowing => borrowing.id !== id));
+      await axios.delete(
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${id}`
+      );
+      setBorrowings(borrowings.filter((borrowing) => borrowing.id !== id));
     } catch (err) {
-      setError('Failed to delete borrowing.');
+      setError("Failed to delete borrowing.");
     }
   };
 
-  const handleBookSelect = (e) => {
-    const selectedBook = books.find(book => book.id === parseInt(e.target.value, 10));
-    setNewBorrowing(prev => ({
-      ...prev,
-      bookForBorrowingRequest: selectedBook ? {
-        id: selectedBook.id,
-        name: selectedBook.name,
-        publicationYear: selectedBook.publicationYear,
-        stock: selectedBook.stock
-      } : {
-        id: '',
-        name: '',
-        publicationYear: 0,
-        stock: 0
-      }
-    }));
-  };
-
   const handleEditBorrowing = (borrowing) => {
-    console.log('Borrowing being edited:', borrowing); // Log the borrowing object
-
-    if (!borrowing) return; // Check if borrowing is defined
+    if (!borrowing) return;
 
     setEditBorrowing(borrowing);
     setNewBorrowing({
@@ -118,53 +107,90 @@ function BorrowPage() {
       borrowerMail: borrowing.borrowerMail,
       borrowingDate: borrowing.borrowingDate,
       bookForBorrowingRequest: {
-        id: borrowing.bookForBorrowingRequest?.id || '', // Use optional chaining
-        name: borrowing.bookForBorrowingRequest?.name || '',
-        publicationYear: borrowing.bookForBorrowingRequest?.publicationYear || 0,
-        stock: borrowing.bookForBorrowingRequest?.stock || 0
-      }
+        id: borrowing.book.id, // Book nesnesinden al
+        name: borrowing.book.name,
+        publicationYear: borrowing.book.publicationYear,
+        stock: borrowing.book.stock,
+      },
     });
+  };
+
+  const handleBookSelect = (e) => {
+    const selectedBookId = parseInt(e.target.value, 10);
+    const selectedBook = books.find((book) => book.id === selectedBookId);
+    setNewBorrowing((prev) => ({
+      ...prev,
+      bookForBorrowingRequest: selectedBook
+        ? {
+            id: selectedBook.id,
+            name: selectedBook.name,
+            publicationYear: selectedBook.publicationYear,
+            stock: selectedBook.stock,
+          }
+        : {
+            id: "",
+            name: "",
+            publicationYear: 0,
+            stock: 0,
+          },
+    }));
   };
 
   const handleUpdateBorrowing = async (e) => {
     e.preventDefault();
 
+    const borrowingDate = new Date(newBorrowing.borrowingDate);
+    const returnDate = new Date(borrowingDate);
+    returnDate.setMonth(returnDate.getMonth() + 1);
+
     const updatedData = {
       borrowerName: newBorrowing.borrowerName,
-      borrowerMail: newBorrowing.borrowerMail,
-      borrowingDate: newBorrowing.borrowingDate,
-      bookForBorrowingRequest: {
+      borrowerMail: newBorrowing.borrowerMail, 
+      borrowingDate: borrowingDate.toISOString(),
+      returnDate: returnDate.toISOString(),
+      book: {
         id: newBorrowing.bookForBorrowingRequest.id,
         name: newBorrowing.bookForBorrowingRequest.name,
         publicationYear: newBorrowing.bookForBorrowingRequest.publicationYear,
-        stock: newBorrowing.bookForBorrowingRequest.stock
-      }
+        stock: newBorrowing.bookForBorrowingRequest.stock,
+      },
     };
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${editBorrowing.id}`, updatedData);
-      const updatedBorrowings = borrowings.map(borrowing => 
+      const res = await axios.put(
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${
+          editBorrowing.id
+        }`,
+        updatedData
+      );
+
+      
+      console.log("Güncellenen borrowing:", res.data);
+
+     
+      const updatedBorrowings = borrowings.map((borrowing) =>
         borrowing.id === editBorrowing.id ? res.data : borrowing
       );
       setBorrowings(updatedBorrowings);
       resetEditBorrowing();
-      showModal('Success', 'Borrowing updated successfully.', 'success');
+      showModal("Success", "Borrowing updated successfully.", "success");
     } catch (err) {
-      setError('Failed to update borrowing.');
+      console.error(err.response.data);
+      setError("Failed to update borrowing.");
     }
   };
 
   const resetNewBorrowing = () => {
     setNewBorrowing({
-      borrowerName: '',
-      borrowerMail: '',
-      borrowingDate: '',
+      borrowerName: "",
+      borrowerMail: "",
+      borrowingDate: "",
       bookForBorrowingRequest: {
-        id: '',
-        name: '',
+        id: "",
+        name: "",
         publicationYear: 0,
-        stock: 0
-      }
+        stock: 0,
+      },
     });
   };
 

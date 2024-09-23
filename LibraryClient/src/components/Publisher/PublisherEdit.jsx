@@ -13,7 +13,7 @@ function PublisherEdit({ publisher, onChange, onSubmit, error }) {
           fullWidth
           value={publisher.name}
           onChange={(e) => onChange('name', e.target.value)}
-          sx={{ mb: 2 }} // TextField'ler arasında boşluk
+          sx={{ mb: 2 }} 
         />
         <TextField
           label="Establishment Year"
@@ -21,14 +21,14 @@ function PublisherEdit({ publisher, onChange, onSubmit, error }) {
           type="number"
           value={publisher.establishmentYear}
           onChange={(e) => onChange('establishmentYear', e.target.value)}
-          sx={{ mb: 2 }} // TextField'ler arasında boşluk
+          sx={{ mb: 2 }} 
         />
         <TextField
           label="Address"
           fullWidth
           value={publisher.address}
           onChange={(e) => onChange('address', e.target.value)}
-          sx={{ mb: 2 }} // TextField'ler arasında boşluk
+          sx={{ mb: 2 }}
         />
         {error && <Typography color="error">{error}</Typography>}
         <Button type="submit" fullWidth variant="contained">
