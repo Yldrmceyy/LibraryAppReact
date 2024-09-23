@@ -37,7 +37,7 @@ function Navbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        My App
+        LibrManage
       </Typography>
       <Divider />
       <List>
@@ -57,27 +57,53 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: '#aed814' }}>
+      <AppBar
+        component="nav"
+        sx={{
+          backgroundColor: '#303f9f', // Koyu indigo arka plan
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Gölge efekti
+        }}
+      >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: 'none' }, color: '#fff' }} // Menü simgesi için beyaz renk
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textAlign: 'center' ,fontWeight: 'bold'  }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'block' },
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#ffeb3b', // Sarı renk kontrastı
+              textTransform: 'uppercase',
+            }}
           >
-            LIBRARY PROJECT
+            LibrManage
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'center', flexGrow: 1 }}>
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: '#fff', fontWeight: 'bold'  } } component={Link} to={item.path}>
+              <Button
+                key={item.name}
+                sx={{
+                  color: '#fff', // Beyaz metin
+                  fontWeight: 'bold',
+                  mx: 1,
+                  ':hover': {
+                    backgroundColor: '#ffeb3b', // Sarı hover efekti
+                    color: '#303f9f', // Hover durumunda indigo metin rengi
+                  },
+                }}
+                component={Link}
+                to={item.path}
+              >
                 {item.name}
               </Button>
             ))}
@@ -91,7 +117,7 @@ function Navbar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, 
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -103,7 +129,6 @@ function Navbar(props) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        
       </Box>
     </Box>
   );
