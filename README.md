@@ -3,8 +3,8 @@
 This is a full-stack **Library Management System**, developed as a capstone project for the Patika+ Frontend Web Developer Program. The system allows users to manage books, borrowers, authors, categories, publishers, and borrowing transactions. The backend API is built with **Spring Boot**, while the frontend interface is developed using **React**.
 
 ## 🌐 Live Demo
-- **Backend**: [Library App Backend](https://library-app-backend.onrender.com)
-- **Frontend**: [Library App Frontend](http://your-live-url-here.com)
+- **Backend**: [Library App Backend](https://github.com/Yldrmceyy/LibraryAppSpringBoot)
+- **Frontend**: [Library App Frontend](https://github.com/Yldrmceyy/LibraryAppReact)
 
 ## 🚀 Features
 
@@ -99,7 +99,7 @@ Each page is accessible through the navigation bar, and you can switch between t
     ```bash
     yarn start
     ```
-5. The application should now be running on `http://localhost:3000`.
+5. The application should now be running on `http://localhost:8080`.
 
 ### Frontend Setup:
 1. Clone the repository:
