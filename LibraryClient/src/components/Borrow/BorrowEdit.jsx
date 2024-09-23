@@ -17,13 +17,30 @@ function BorrowEdit({
   handleBookSelect,
   books,
 }) {
-  // Handle change in text fields (name, email, borrowing date, return date)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBorrowRequest((prevRequest) => ({
-      ...prevRequest,
-      [name]: value,
-    }));
+    
+    if (name === "borrowingDate") {
+      const borrowingDate = new Date(value);
+      const returnDate = new Date(borrowingDate);
+      returnDate.setDate(returnDate.getDate() + 30); // Auto-set return date to 30 days later
+      
+      setBorrowRequest((prevRequest) => ({
+        ...prevRequest,
+        borrowingDate: value, // Update borrowingDate with selected date
+        returnDate: prevRequest.returnDate || returnDate.toISOString().split('T')[0], // Only auto-set if returnDate is empty
+      }));
+    } else if (name === "returnDate") {
+      setBorrowRequest((prevRequest) => ({
+        ...prevRequest,
+        returnDate: value, // Allow user to manually change return date
+      }));
+    } else {
+      setBorrowRequest((prevRequest) => ({
+        ...prevRequest,
+        [name]: value,
+      }));
+    }
   };
 
   return (
@@ -32,7 +49,6 @@ function BorrowEdit({
         Edit Borrow Request
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
-        {/* Borrower Name */}
         <Box mb={2}>
           <TextField
             label="Borrower Name"
@@ -44,7 +60,6 @@ function BorrowEdit({
           />
         </Box>
 
-        {/* Borrower Email */}
         <Box mb={2}>
           <TextField
             label="Borrower Email"
@@ -56,7 +71,6 @@ function BorrowEdit({
           />
         </Box>
 
-        {/* Borrowing Date */}
         <Box mb={2}>
           <TextField
             label="Borrowing Date"
@@ -70,21 +84,19 @@ function BorrowEdit({
           />
         </Box>
 
-        {/* Return Date */}
         <Box mb={2}>
           <TextField
             label="Return Date"
             fullWidth
             type="date"
             InputLabelProps={{ shrink: true }}
-            value={borrowRequest.returnDate} // Handle return date
+            value={borrowRequest.returnDate} // Editable return date
             onChange={handleChange}
             name="returnDate"
             required
           />
         </Box>
 
-        {/* Book Select */}
         <Box mb={2}>
           <FormControl fullWidth required>
             <InputLabel>Select Book</InputLabel>
@@ -102,7 +114,6 @@ function BorrowEdit({
           </FormControl>
         </Box>
 
-        {/* Submit Button */}
         <Box>
           <Button type="submit" fullWidth variant="contained">
             Update Borrow Request
