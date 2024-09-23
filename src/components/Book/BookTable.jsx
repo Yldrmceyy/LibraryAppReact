@@ -1,4 +1,3 @@
-// src/components/Book/BookTable.js
 import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,22 +7,17 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-export default function BookTable({
-  books,
-  authors,
-  publishers,
-  categories,
-  onEdit,
-  onDelete,
-  onAdd,
-}) {
+export default function BookTable({ books, authors, publishers, categories, onEdit, onDelete, onAdd }) {
   return (
-    <Paper className="table-container">
+    <Paper className="table-container" sx={{ padding: "2rem", backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
       <Button
         variant="contained"
-        color="primary"
         onClick={onAdd}
-        style={{ marginBottom: "16px" }}
+        sx={{
+          backgroundColor: "#303f9f",
+          ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+          marginBottom: "16px",
+        }}
       >
         Add New Book
       </Button>
@@ -65,9 +59,12 @@ export default function BookTable({
               <TableCell>
                 <Button
                   variant="contained"
-                  color="primary"
+                  sx={{
+                    backgroundColor: "#303f9f",
+                    ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+                    marginRight: "10px",
+                  }}
                   onClick={() => onEdit(book)}
-                  style={{ marginRight: "10px" }}
                 >
                   Edit
                 </Button>
