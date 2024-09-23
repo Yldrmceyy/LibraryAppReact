@@ -1,67 +1,83 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Paper, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Paper, Typography, Box } from '@mui/material';
 
 const PublisherTable = ({ publishers, onEdit, onDelete, onAdd }) => {
   return (
-    <TableContainer component={Paper}>
-      {/* Add Publisher Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={onAdd}
-        sx={{ mt: 2, mb: 2 }} // Added spacing before and after the button
-      >
-        Add Publisher
-      </Button>
+    <Box sx={{ padding: 2 }}>
+      <TableContainer component={Paper} sx={{ padding: 2, backgroundColor: '#f5f5f5', borderRadius: '8px', marginBottom: 4 }}>
+        {/* Add Publisher Button */}
+        <Button
+          variant="contained"
+          onClick={onAdd}
+          sx={{
+            backgroundColor: '#303f9f',
+            ':hover': { backgroundColor: '#ffeb3b', color: '#303f9f' },
+            marginTop: 2,
+            marginBottom: 2,
+          }}
+        >
+          Add Publisher
+        </Button>
 
-      {/* Table */}
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell> {/* New ID column */}
-            <TableCell>Name</TableCell>
-            <TableCell>Establishment Year</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {publishers.length > 0 ? (
-            publishers.map((publisher) => (
-              <TableRow key={publisher.id}>
-                <TableCell>{publisher.id}</TableCell> {/* Displaying the ID */}
-                <TableCell>{publisher.name}</TableCell>
-                <TableCell>{publisher.establishmentYear}</TableCell>
-                <TableCell>{publisher.address}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onEdit(publisher)}
-                    sx={{ mr: 1 }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    onClick={() => onDelete(publisher.id)}
-                  >
-                    Delete
-                  </Button>
+        {/* Table */}
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Establishment Year</TableCell>
+              <TableCell>Address</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {publishers.length > 0 ? (
+              publishers.map((publisher) => (
+                <TableRow key={publisher.id}>
+                  <TableCell>{publisher.id}</TableCell>
+                  <TableCell>{publisher.name}</TableCell>
+                  <TableCell>{publisher.establishmentYear}</TableCell>
+                  <TableCell>{publisher.address}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      onClick={() => onEdit(publisher)}
+                      sx={{
+                        backgroundColor: '#303f9f',
+                        ':hover': { backgroundColor: '#ffeb3b', color: '#303f9f' },
+                        marginRight: 1,
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      sx={{
+                      ":hover": {
+                        backgroundColor: "#ffeb3b",
+                        color: "#303f9f",
+                      },
+                      marginRight: "10px",
+                    }}
+                      onClick={() => onDelete(publisher.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <Typography align="center">No publishers available</Typography>
                 </TableCell>
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={5}> {/* Updated colSpan to match column count */}
-                <Typography align="center">No publishers available</Typography>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
