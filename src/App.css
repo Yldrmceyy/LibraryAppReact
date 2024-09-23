@@ -3,7 +3,7 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: #e0e7ff; /* Hafif pastel mavi arka plan */
   text-align: center;
 }
 
@@ -16,14 +16,19 @@ body {
 .form-container {
   background-color: #fff;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px; /* Border radius artırıldı */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08); /* Hafif gölge */
+  transition: transform 0.3s ease; /* Yumuşak animasyon efekti */
+}
+
+.form-container:hover {
+  transform: translateY(-4px); /* Hover'da hafif yükselme efekti */
 }
 
 .author-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem; /* Boşluk artırıldı */
 }
 
 .author-form .MuiTextField-root {
@@ -31,21 +36,34 @@ body {
 }
 
 button {
-  width: 30%;
-  padding: 0.5rem;
+  width: 35%; /* Buton genişliği artırıldı */
+  padding: 0.75rem; /* Yüksekliği artırıldı */
   margin-right: 1rem;
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Yazı boyutu büyütüldü */
+  font-weight: bold; /* Yazı kalınlığı artırıldı */
+  background-color: #3f51b5; /* Indigo arka plan rengi */
   border: none;
-  border-radius: 4px;
+  border-radius: 6px; /* Border radius artırıldı */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Yumuşak geçiş efekti */
 }
 
 button:hover {
-  background-color: #aed814;
+  background-color: #303f9f; /* Daha koyu indigo hover efekti */
+  transform: translateY(-2px); /* Hover'da hafif yükselme efekti */
 }
+
 .table-container {
-  margin-top: 2rem; 
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  background-color: #fff; /* Beyaz arka plan */
+  padding: 1.5rem;
+  border-radius: 12px; /* Border radius artırıldı */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Daha yumuşak gölge */
+  transition: transform 0.3s ease; /* Yumuşak animasyon efekti */
 }
+
+.table-container:hover {
+  transform: translateY(-4px); /* Hover'da hafif yükselme efekti */
+}
+
