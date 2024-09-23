@@ -71,6 +71,13 @@ export default function BookTable({ books, authors, publishers, categories, onEd
                 <Button
                   variant="outlined"
                   color="error"
+                  sx={{
+                      ":hover": {
+                        backgroundColor: "#ffeb3b",
+                        color: "#303f9f",
+                      },
+                      marginRight: "10px",
+                    }}
                   onClick={() => onDelete(book.id)}
                 >
                   Delete
