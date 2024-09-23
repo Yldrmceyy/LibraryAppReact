@@ -59,13 +59,13 @@ function BorrowPage() {
     e.preventDefault();
     const borrowingDate = new Date();
     const returnDate = new Date(borrowingDate);
-    returnDate.setMonth(returnDate.getMonth() + 1);
+    returnDate.setDate(returnDate.getDate() + 30); // Return date is 30 days after borrowing date
 
     const borrowingData = {
       borrowerName: newBorrowing.borrowerName,
       borrowerMail: newBorrowing.borrowerMail,
       borrowingDate: borrowingDate.toISOString(),
-      returnDate: returnDate.toISOString(),
+      returnDate: returnDate.toISOString(), // Set calculated return date
       bookForBorrowingRequest: {
         id: parseInt(newBorrowing.bookForBorrowingRequest.id, 10) || 0,
         name: newBorrowing.bookForBorrowingRequest.name,
@@ -107,7 +107,7 @@ function BorrowPage() {
       borrowerMail: borrowing.borrowerMail,
       borrowingDate: borrowing.borrowingDate,
       bookForBorrowingRequest: {
-        id: borrowing.book.id, // Book nesnesinden al
+        id: borrowing.book.id, 
         name: borrowing.book.name,
         publicationYear: borrowing.book.publicationYear,
         stock: borrowing.book.stock,
@@ -138,16 +138,15 @@ function BorrowPage() {
 
   const handleUpdateBorrowing = async (e) => {
     e.preventDefault();
-
+  
     const borrowingDate = new Date(newBorrowing.borrowingDate);
-    const returnDate = new Date(borrowingDate);
-    returnDate.setMonth(returnDate.getMonth() + 1);
-
+    const returnDate = new Date(newBorrowing.returnDate); // Parse the updated returnDate
+  
     const updatedData = {
       borrowerName: newBorrowing.borrowerName,
-      borrowerMail: newBorrowing.borrowerMail, 
-      borrowingDate: borrowingDate.toISOString(),
-      returnDate: returnDate.toISOString(),
+      borrowerMail: newBorrowing.borrowerMail,
+      borrowingDate: borrowingDate.toISOString(), // Ensure proper format for backend
+      returnDate: returnDate.toISOString(), // Send the updated returnDate in ISO format
       book: {
         id: newBorrowing.bookForBorrowingRequest.id,
         name: newBorrowing.bookForBorrowingRequest.name,
@@ -155,19 +154,14 @@ function BorrowPage() {
         stock: newBorrowing.bookForBorrowingRequest.stock,
       },
     };
-
+  
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${
-          editBorrowing.id
-        }`,
+        `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows/${editBorrowing.id}`,
         updatedData
       );
-
-      
-      console.log("Güncellenen borrowing:", res.data);
-
-     
+  
+      // Update the borrowings list with the edited borrowing
       const updatedBorrowings = borrowings.map((borrowing) =>
         borrowing.id === editBorrowing.id ? res.data : borrowing
       );
@@ -175,10 +169,12 @@ function BorrowPage() {
       resetEditBorrowing();
       showModal("Success", "Borrowing updated successfully.", "success");
     } catch (err) {
-      console.error(err.response.data);
+      console.error(err.response?.data || err);
       setError("Failed to update borrowing.");
     }
   };
+  
+  
 
   const resetNewBorrowing = () => {
     setNewBorrowing({

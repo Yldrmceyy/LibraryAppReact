@@ -17,6 +17,7 @@ function BorrowEdit({
   handleBookSelect,
   books,
 }) {
+  // Handle change in text fields (name, email, borrowing date, return date)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBorrowRequest((prevRequest) => ({
@@ -28,9 +29,10 @@ function BorrowEdit({
   return (
     <Box className="form-container" sx={{ maxWidth: 500, margin: "0 auto" }}>
       <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
-        Borrow a Book
+        Edit Borrow Request
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
+        {/* Borrower Name */}
         <Box mb={2}>
           <TextField
             label="Borrower Name"
@@ -41,16 +43,20 @@ function BorrowEdit({
             required
           />
         </Box>
+
+        {/* Borrower Email */}
         <Box mb={2}>
           <TextField
             label="Borrower Email"
             fullWidth
-            value={borrowRequest.borrowerMail} // Burada borrowerMail'i alıyoruz
+            value={borrowRequest.borrowerMail}
             onChange={handleChange}
             name="borrowerMail"
             required
           />
         </Box>
+
+        {/* Borrowing Date */}
         <Box mb={2}>
           <TextField
             label="Borrowing Date"
@@ -63,12 +69,28 @@ function BorrowEdit({
             required
           />
         </Box>
+
+        {/* Return Date */}
+        <Box mb={2}>
+          <TextField
+            label="Return Date"
+            fullWidth
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={borrowRequest.returnDate} // Handle return date
+            onChange={handleChange}
+            name="returnDate"
+            required
+          />
+        </Box>
+
+        {/* Book Select */}
         <Box mb={2}>
           <FormControl fullWidth required>
             <InputLabel>Select Book</InputLabel>
             <Select
-              value={borrowRequest.bookForBorrowingRequest.id || ""}
-              onChange={(e) => handleBookSelect(e)} 
+              value={borrowRequest.bookForBorrowingRequest.id || ""} // Ensure the value is set correctly
+              onChange={handleBookSelect} // Calls parent handler to update the book in state
               name="bookId"
             >
               {books.map((book) => (
@@ -79,9 +101,11 @@ function BorrowEdit({
             </Select>
           </FormControl>
         </Box>
+
+        {/* Submit Button */}
         <Box>
           <Button type="submit" fullWidth variant="contained">
-            Update Borrow Book
+            Update Borrow Request
           </Button>
         </Box>
       </form>
