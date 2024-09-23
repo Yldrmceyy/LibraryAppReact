@@ -85,7 +85,16 @@ function BorrowPage() {
         `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`,
         borrowingData
       );
-      setBorrowings([...borrowings, res.data]);
+  
+      // Add the new borrowing entry to the state
+      setBorrowings([
+        ...borrowings,
+        {
+          ...res.data,
+          returnDate: returnDate.toISOString(), // Add return date directly to the new entry for the table
+        },
+      ]);
+  
       resetNewBorrowing();
       showModal("Success", "Borrowing added successfully.", "success");
     } catch (err) {
