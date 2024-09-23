@@ -109,7 +109,7 @@ Each page is accessible through the navigation bar, and you can switch between t
 
 2. Navigate into the project directory:
     ```bash
-    cd 
+    cd LibraryAppReact
     ```
 
 3. Install dependencies:
