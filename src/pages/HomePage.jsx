@@ -67,7 +67,7 @@ function HomePage() {
                   fontSize: "1.2rem", 
                   backgroundColor: "#0066cc", 
                   ":hover": {
-                    backgroundColor: "#004c99", r
+                    backgroundColor: "#004c99", 
                   },
                 }}
               >
