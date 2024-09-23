@@ -1,25 +1,19 @@
-import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Button,
-  Paper,
-  Typography
-} from '@mui/material';
+import React from "react";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Paper, Typography } from "@mui/material";
 
 const CategoryTable = ({ categories, onEdit, onDelete, onAdd }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ padding: 2, backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
       {/* Add Category Button */}
       <Button
         variant="contained"
-        color="primary"
         onClick={onAdd}
-        sx={{ mt: 2, mb: 2 }}
+        sx={{
+          backgroundColor: "#303f9f",
+          ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+          marginTop: 2,
+          marginBottom: 2,
+        }}
       >
         Add Category
       </Button>
@@ -44,9 +38,12 @@ const CategoryTable = ({ categories, onEdit, onDelete, onAdd }) => {
                 <TableCell>
                   <Button
                     variant="contained"
-                    color="primary"
                     onClick={() => onEdit(category)}
-                    sx={{ mr: 1 }}
+                    sx={{
+                      backgroundColor: "#303f9f",
+                      ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+                      marginRight: 1,
+                    }}
                   >
                     Edit
                   </Button>
