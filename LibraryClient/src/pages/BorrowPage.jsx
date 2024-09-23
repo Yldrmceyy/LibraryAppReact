@@ -57,15 +57,21 @@ function BorrowPage() {
 
   const handleAddBorrowing = async (e) => {
     e.preventDefault();
-    const borrowingDate = new Date();
+  
+    // Get or set the borrowingDate
+    const borrowingDate = newBorrowing.borrowingDate
+      ? new Date(newBorrowing.borrowingDate)
+      : new Date(); // If no date is selected, use the current date
+  
+    // Auto-calculate returnDate (30 days after borrowingDate)
     const returnDate = new Date(borrowingDate);
-    returnDate.setDate(returnDate.getDate() + 30); // Return date is 30 days after borrowing date
-
+    returnDate.setDate(returnDate.getDate() + 30); // Add 30 days
+  
     const borrowingData = {
       borrowerName: newBorrowing.borrowerName,
       borrowerMail: newBorrowing.borrowerMail,
-      borrowingDate: borrowingDate.toISOString(),
-      returnDate: returnDate.toISOString(), // Set calculated return date
+      borrowingDate: borrowingDate.toISOString(), // ISO format for backend
+      returnDate: returnDate.toISOString(), // Auto-calculated returnDate
       bookForBorrowingRequest: {
         id: parseInt(newBorrowing.bookForBorrowingRequest.id, 10) || 0,
         name: newBorrowing.bookForBorrowingRequest.name,
@@ -73,7 +79,7 @@ function BorrowPage() {
         stock: newBorrowing.bookForBorrowingRequest.stock,
       },
     };
-
+  
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}/api/v1/borrows`,
@@ -86,6 +92,7 @@ function BorrowPage() {
       setError("Failed to add borrowing.");
     }
   };
+  
 
   const handleDeleteBorrowing = async (id) => {
     try {
