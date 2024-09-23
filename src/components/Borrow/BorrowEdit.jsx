@@ -1,39 +1,24 @@
 import React from "react";
-import {
-  TextField,
-  Button,
-  Typography,
-  Box,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { TextField, Button, Typography, Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 
-function BorrowEdit({
-  borrowRequest,
-  setBorrowRequest,
-  onSubmit,
-  handleBookSelect,
-  books,
-}) {
+function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelect, books }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "borrowingDate") {
       const borrowingDate = new Date(value);
       const returnDate = new Date(borrowingDate);
-      returnDate.setDate(returnDate.getDate() + 30); // Auto-set return date to 30 days later
-      
+      returnDate.setDate(returnDate.getDate() + 30);
+
       setBorrowRequest((prevRequest) => ({
         ...prevRequest,
-        borrowingDate: value, // Update borrowingDate with selected date
-        returnDate: prevRequest.returnDate || returnDate.toISOString().split('T')[0], // Only auto-set if returnDate is empty
+        borrowingDate: value,
+        returnDate: prevRequest.returnDate || returnDate.toISOString().split('T')[0],
       }));
     } else if (name === "returnDate") {
       setBorrowRequest((prevRequest) => ({
         ...prevRequest,
-        returnDate: value, // Allow user to manually change return date
+        returnDate: value,
       }));
     } else {
       setBorrowRequest((prevRequest) => ({
@@ -44,8 +29,8 @@ function BorrowEdit({
   };
 
   return (
-    <Box className="form-container" sx={{ maxWidth: 500, margin: "0 auto" }}>
-      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
+    <Box className="form-container" sx={{ maxWidth: 500, margin: "0 auto", padding: 2, backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
+      <Typography component="h1" variant="h5" sx={{ marginBottom: 2, color: "#303f9f" }}>
         Edit Borrow Request
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
@@ -90,7 +75,7 @@ function BorrowEdit({
             fullWidth
             type="date"
             InputLabelProps={{ shrink: true }}
-            value={borrowRequest.returnDate} // Editable return date
+            value={borrowRequest.returnDate}
             onChange={handleChange}
             name="returnDate"
             required
@@ -101,8 +86,8 @@ function BorrowEdit({
           <FormControl fullWidth required>
             <InputLabel>Select Book</InputLabel>
             <Select
-              value={borrowRequest.bookForBorrowingRequest.id || ""} // Ensure the value is set correctly
-              onChange={handleBookSelect} // Calls parent handler to update the book in state
+              value={borrowRequest.bookForBorrowingRequest.id || ""}
+              onChange={handleBookSelect}
               name="bookId"
             >
               {books.map((book) => (
@@ -115,7 +100,15 @@ function BorrowEdit({
         </Box>
 
         <Box>
-          <Button type="submit" fullWidth variant="contained">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              backgroundColor: "#303f9f",
+              ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+            }}
+          >
             Update Borrow Request
           </Button>
         </Box>

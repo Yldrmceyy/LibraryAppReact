@@ -11,9 +11,9 @@ function BorrowForm({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
   };
 
   return (
-    <Box className="form-container" sx={{ maxWidth: 500, margin: '0 auto' }}>
-      <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}  >
-        {/* Borrow a Book */}
+    <Box className="form-container" sx={{ maxWidth: 500, margin: '0 auto', padding: 2, backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
+      <Typography component="h1" variant="h5" sx={{ marginBottom: 2, color: "#303f9f" }}>
+        Borrow a Book
       </Typography>
       <form onSubmit={onSubmit} className="book-borrow-form">
         <Box mb={2}>
@@ -65,7 +65,15 @@ function BorrowForm({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
           </FormControl>
         </Box>
         <Box>
-          <Button type="submit" fullWidth variant="contained">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              backgroundColor: "#303f9f",
+              ":hover": { backgroundColor: "#ffeb3b", color: "#303f9f" },
+            }}
+          >
             Borrow Book
           </Button>
         </Box>

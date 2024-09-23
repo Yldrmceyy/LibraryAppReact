@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Box, MenuItem, Select, InputLabel, FormC
 function BookForm({ book, authors, publishers, categories, onChange, onSubmit, error }) {
   return (
     <Box className="form-container" sx={{ padding: "2rem", backgroundColor: "#f5f5f5", borderRadius: "8px" }}>
-      <Typography component="h1" variant="h5" sx={{ marginBottom: "1rem", color: "#303f9f" }}>
+      <Typography component="h1" variant="h5" sx={{ marginBottom: "2", color: "#303f9f" }}>
         {book.id ? "Edit Book" : "Add Book"}
       </Typography>
       <form onSubmit={onSubmit} className="book-form">
