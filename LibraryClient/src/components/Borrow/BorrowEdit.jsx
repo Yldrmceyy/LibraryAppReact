@@ -66,7 +66,7 @@ function BorrowEdit({ borrowRequest, setBorrowRequest, onSubmit, handleBookSelec
         </Box>
         <Box>
           <Button type="submit" fullWidth variant="contained">
-            Borrow Book
+            Update Borrow Book
           </Button>
         </Box>
       </form>
