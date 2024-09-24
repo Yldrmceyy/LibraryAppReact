@@ -33,6 +33,7 @@ function HomePage() {
       }}
     >
       <Box sx={{ position: "relative", zIndex: 2 }}>
+      
         <Typography
           variant="h2"
           gutterBottom
@@ -40,18 +41,9 @@ function HomePage() {
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
           }}
+        
         >
-          Welcome to the Library
-        </Typography>
-        <Typography
-          variant="h5"
-          gutterBottom
-          sx={{
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
-            fontSize: "1.5rem",
-          }}
-        >
-          Discover and borrow your favorite books!
+          Library Management System
         </Typography>
         <Grid container justifyContent="center" sx={{ marginTop: "20px" }}>
           <Grid item>
