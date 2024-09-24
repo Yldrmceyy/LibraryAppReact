@@ -3,8 +3,7 @@
 This is a full-stack **Library Management System**, developed as a capstone project for the **Patika+ Frontend Web Developer Program**. It allows users to manage books, borrowers, authors, categories, publishers, and borrowing transactions. The backend API is built with **Spring Boot**, while the frontend is developed using **React**.
 
 ## 🌐 Live Demo
-- **Backend**: [Library App Backend](https://github.com/Yldrmceyy/LibraryAppSpringBoot)
-- **Frontend**: [Library App Frontend](https://library-app-react-mu.vercel.app/)
+- **Frontend**: [Library App Frontend](https://library-app-react-togu.vercel.app/)
 
 ---
 
