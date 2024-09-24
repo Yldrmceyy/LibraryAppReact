@@ -4,7 +4,7 @@ This is a full-stack **Library Management System**, developed as a capstone proj
 
 ## 🌐 Live Demo
 - **Backend**: [Library App Backend](https://github.com/Yldrmceyy/LibraryAppSpringBoot)
-- **Frontend**: [Library App Frontend](https://github.com/Yldrmceyy/LibraryAppReact)
+- **Frontend**: [Library App Frontend](https://library-app-react-mu.vercel.app/)
 
 ---
 
